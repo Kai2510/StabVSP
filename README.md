@@ -14,7 +14,9 @@ For static stability, the inertia file is not needed. Just comment lines for rea
 
 For dynamic stability, the eigenvalues and eigenvectors of small pertubration equations in body axes are calculated, in both lonitudinal and lateral directions. Note that this program needs the aircraft's pitch angle $\theta$ (the angle between x axis in body axes and the ground) and climbing angle $\gamma$ (the angle between velocity and the ground) as inputs. the pitch angle is used in lateral dynamic stability's calculation, and the climbing angle is used in longitudinal dynamic stability's calculation. You can set them as zero in the initial analysis.
 
-# Examples and Standard Models
+# Usage, Examples and Standard Models
+
+Drop the `.stab` file and inertia file into one directory, and write the path into the variables in `StabVSP.ipynb`. Then run the `.ipynb` script.
 
 See `Examples` directory which includes a flying wing aircraft `Progress 6`, and a standard model in NASA report. 
 
