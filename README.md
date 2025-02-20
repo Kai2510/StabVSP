@@ -18,7 +18,7 @@ For dynamic stability, the eigenvalues and eigenvectors of small pertubration eq
 
 Drop the `.stab` file and inertia file into one directory, and write the path into the variables in `StabVSP.ipynb`. Then run the `.ipynb` script.
 
-See `Examples` directory which includes a flying wing aircraft `Progress 6`, and a standard model in NASA report. 
+See `Examples` directory which includes a flying wing aircraft `Progress 6`, and a standard model in NASA report. The comparison result of the aerodynamic derivatives between OpenVSP's VLM methods, VLM513's VLM methods and windtunnel test results are needed to be added. [VLM513](https://shi.buaa.edu.cn/songlei/zh_CN/jxzy/20673/content/1167.htm) is a MATLAB program developed by SONG Lei in BUAA which is more precise in calculating lateral aerodynamic derivatives. 
 
 # Reference & Cite
 
@@ -29,7 +29,7 @@ The small pertubration equations, the meaning of each `aerodynamic derivatives` 
 If you need to cite this program, please cite this GitHub page or cite the paper above. 
 ```
 @misc{neuralfoil,
-  author = {Zhikai Li},
+  author = {LI Zhikai},
   title = {{StabVSP}: Python script for evaluate stablity using VSPAero's aerodynamic derivatives result. },
   year = {2025},
   publisher = {GitHub},
