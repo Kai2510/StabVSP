@@ -12,13 +12,26 @@ For static stability, the inertia file is not needed. Just comment lines for rea
 
 For dynamic stability, the eigenvalues and eigenvectors of small pertubration equations in body axes are calculated, in both lonitudinal and lateral directions. Note that this program needs the aircraft's pitch angle $\theta$ (the angle between x axis in body axes and the ground) and climbing angle $\gamma$ (the angle between velocity and the ground) as inputs. the pitch angle is used in lateral dynamic stability's calculation, and the climbing angle is used in longitudinal dynamic stability's calculation. You can set them as zero in the initial analysis.
 
+In the future, the dynamic derivatives in unsteady scenes (p, q, and r analysis) will be considered. Scripts reading `.pstab`, `.qstab` and `.rstab` file and fetching derivatives with `alpha_dot` and `beta_dot` are remaining to be finished.
+
+# Coordinate Systems
+
+It's worth noting that the coordinate systems' direction is very important. There are four coordinate systems, and the coordinate systems used for stability analysis are according to ISO standards.
+
+1. Ground Coordinates.
+2. Aircraft Body Coordinates (Used in stability analysis): X - forward, Y - right, Z - downward. 
+3. Aircraft Body Coordinates In OpenVSP: X - backward, Y - right, Z - upward. 
+4. Wind Coordinates: Alpha positive if velocity vector points downwards, Beta positive if velocity vector points right.
+
+Values in `.stab` file (CL, CD, CS, CMl, CMm, CMn, and those derivatives with alpha, beta, p, q, r) are according to coordinates 2 & 4 (ISO standard) while original data (CFx, CFz, CMx, CMy, CMz and those derivatives with alpha, beta, p, q, r) are according to coordinates 3 & 4 and not used for calculation in the python script except those related `CFy`. That does not matter since y-direction is the same between coordinates 2 & 3.
+
 # Usage, Examples and Standard Models
 
 Firstly, calculate aerodynamic derivatives in OpenVSP, and inertia using `Inertia.py`(optional if you only evaluate static stability). Then drop the `.stab` file and inertia file into one directory, and write the path into the variables in `StabVSP.ipynb`. Then run the `.ipynb` script. Skip the parts about inertia files if you only evaluate static stability.
 
 See `Examples` directory which includes a flying wing aircraft `Progress 6`. Please refer to `.vsp3` and `.vspaero` file for the settings for stablity analysis settings in OpenVSP.
 
-A standard model in NASA report TM-4640 will be added in the future to. The comparison result of the aerodynamic derivatives between OpenVSP's VLM methods, VLM513's VLM methods and windtunnel test results are needed to be added. [VLM513](https://shi.buaa.edu.cn/songlei/zh_CN/jxzy/20673/content/1167.htm) is a MATLAB program developed by SONG Lei in BUAA which is more precise in calculating lateral aerodynamic derivatives. 
+A standard model in NASA report TM-4640 will be added in the future to validate the accuracy of VSPAERO and the program. The comparison result of the aerodynamic derivatives between OpenVSP's VLM methods, VLM513's VLM methods and windtunnel test results are needed to be added. [VLM513](https://shi.buaa.edu.cn/songlei/zh_CN/jxzy/20673/content/1167.htm) is a MATLAB program developed by SONG Lei in BUAA which is more precise in calculating lateral aerodynamic derivatives. 
 
 # Reference & Cite
 
