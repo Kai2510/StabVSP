@@ -23,7 +23,7 @@ It's worth noting that the coordinate systems' direction is very important. Ther
 3. Aircraft Body Coordinates In OpenVSP: X - backward, Y - right, Z - upward. 
 4. Wind Coordinates: Alpha positive if velocity vector points downwards, Beta positive if velocity vector points right.
 
-Values in `.stab` file (CL, CD, CS, CMl, CMm, CMn, and those derivatives with alpha, beta, p, q, r) are according to coordinates 2 & 4 (ISO standard) while original data (CFx, CFz, CMx, CMy, CMz and those derivatives with alpha, beta, p, q, r) are according to coordinates 3 & 4 and not used for calculation in the python script except those related `CFy`. That does not matter since y-direction is the same between coordinates 2 & 3.
+Values in `.stab` file (CL, CD, CS, CMl, CMm, CMn, and those derivatives with alpha, beta, p, q, r) are according to coordinates 2 & 4 (ISO standard) while original data (CFx, CFz, CMx, CMy, CMz and those derivatives with alpha, beta, p, q, r) are according to coordinates 3 & 4 and not used for calculation in the python script except those related with `CFy`. That does not matter since y-direction is the same between coordinates 2 & 3.
 
 # Usage, Examples and Standard Models
 
