@@ -36,7 +36,7 @@ Firstly, calculate aerodynamic derivatives in OpenVSP, and inertia using `Inerti
 
 See `Examples` directory which includes a flying wing aircraft `Progress 6`. Please refer to `.vsp3` and `.vspaero` file for the settings for stablity analysis settings in OpenVSP.
 
-Method 2 ( v2 ): copy `stabvsp.py` and use it as a package instead of writing all the things in to the `.ipynb` file. See `demo.ipynb` for usage example.
+Method 2 ( v2 ): copy `stabvsp.py` and import it as a module instead of writing all the things in to the `.ipynb` file. See `demo.ipynb` for usage example.
 
 A standard model in NASA report TM-4640 has been added to validate the accuracy of VSPAERO and the program. The detailed comparison result of the aerodynamic derivatives between OpenVSP's VLM methods, VLM513's VLM methods and windtunnel test results are needed to be added. OpenVSP 3.43.0's result is not bad roughly seeing, but needed to be inspected. OpenVSP 3.45.x's result may differ since the solver has been modified a lot.
 [VLM513](https://shi.buaa.edu.cn/songlei/zh_CN/jxzy/20673/content/1167.htm) is a MATLAB program developed by SONG Lei in BUAA which is more precise in calculating lateral aerodynamic derivatives. 
