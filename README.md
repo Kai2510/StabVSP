@@ -1,5 +1,5 @@
 # StabVSP
-Python script for evaluate stablity using OpenVSP's stab file. Current version: v0.1.
+Python script for evaluate stablity using OpenVSP's stab file. Current version: v2.
 
 # Scripts' Description
 There are two scripts and can be launched separately.
@@ -10,9 +10,12 @@ The second script `StabVSP.ipynb` reads `.stab` file and inertia file in the spe
 
 For static stability, the inertia file is not needed. Just comment lines for reading inertia, and plot the aerodynamic coefficients or derivatives, such as `Cm` or `Cnbeta`.
 
-For dynamic stability, the eigenvalues and eigenvectors of small pertubration equations in body axes are calculated, in both lonitudinal and lateral directions. Note that this program needs the aircraft's pitch angle $\theta$ (the angle between x axis in body axes and the ground) and climbing angle $\gamma$ (the angle between velocity and the ground) as inputs. the pitch angle is used in lateral dynamic stability's calculation, and the climbing angle is used in longitudinal dynamic stability's calculation. You can set them as zero in the initial analysis.
+For dynamic stability, the eigenvalues and eigenvectors of small pertubration equations in **body** coordinate system are calculated, in both lonitudinal and lateral directions. Note that this program needs the aircraft's pitch angle $\theta$ (the angle between x axis in body axes and the ground) and climbing angle $\gamma$ (the angle between velocity and the ground) as inputs. the pitch angle is used in lateral dynamic stability's calculation, and the climbing angle is used in longitudinal dynamic stability's calculation. You can set them as zero in the initial analysis.
+Analysis in **wind** coordinates can also work, but the coefficient matrix needs to be rewritten. 
 
-In the future, the dynamic derivatives in unsteady scenes (p, q, and r analysis) will be considered. Scripts reading `.pstab`, `.qstab` and `.rstab` file and fetching derivatives with `alpha_dot` and `beta_dot` are remaining to be finished.
+In version 2, the dynamic derivatives in unsteady scenes (p, q, and r analysis) will be considered. The script can read `.pstab`, `.qstab` and `.rstab` file (if exist) and fetch derivatives with `alpha_dot` and `beta_dot`. `Cm_alpha_dot` & `CL_alpha_dot` is used for longitudinal analysis, and other derivatives are not used currently. You can switch to a more approximated way (ignore `CL_alpha_dot` & related `Z_alpha_dot`) by uncomment & comment different expression of matrix `A1`.
+Tips: Check the convergence and add wake iteration numbers for precision.
+
 
 # Coordinate Systems
 
@@ -27,11 +30,16 @@ Values in `.stab` file (CL, CD, CS, CMl, CMm, CMn, and those derivatives with al
 
 # Usage, Examples and Standard Models
 
+Method 1 ( v1 & v2 ) : Use `StabVSP_v*.ipynb`.
+
 Firstly, calculate aerodynamic derivatives in OpenVSP, and inertia using `Inertia.py`(optional if you only evaluate static stability). Then drop the `.stab` file and inertia file into one directory, and write the path into the variables in `StabVSP.ipynb`. Then run the `.ipynb` script. Skip the parts about inertia files if you only evaluate static stability.
 
 See `Examples` directory which includes a flying wing aircraft `Progress 6`. Please refer to `.vsp3` and `.vspaero` file for the settings for stablity analysis settings in OpenVSP.
 
-A standard model in NASA report TM-4640 will be added in the future to validate the accuracy of VSPAERO and the program. The comparison result of the aerodynamic derivatives between OpenVSP's VLM methods, VLM513's VLM methods and windtunnel test results are needed to be added. [VLM513](https://shi.buaa.edu.cn/songlei/zh_CN/jxzy/20673/content/1167.htm) is a MATLAB program developed by SONG Lei in BUAA which is more precise in calculating lateral aerodynamic derivatives. 
+Method 2 ( v2 ): copy `stabvsp.py` and use it as a package instead of writing all the things in to the `.ipynb` file. See `demo.ipynb` for usage example.
+
+A standard model in NASA report TM-4640 has been added to validate the accuracy of VSPAERO and the program. The detailed comparison result of the aerodynamic derivatives between OpenVSP's VLM methods, VLM513's VLM methods and windtunnel test results are needed to be added. OpenVSP 3.43.0's result is not bad roughly seeing, but needed to be inspected. OpenVSP 3.45.x's result may differ since the solver has been modified a lot.
+[VLM513](https://shi.buaa.edu.cn/songlei/zh_CN/jxzy/20673/content/1167.htm) is a MATLAB program developed by SONG Lei in BUAA which is more precise in calculating lateral aerodynamic derivatives. 
 
 # Reference & Cite
 
